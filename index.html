@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio global de sistemas conversacionales, Voice AI y biometría de voz." />
+  <title>Voice Systems / Global Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#17252a; --paper:#f4f0e8; --sand:#dfd4c2; --coral:#e65d45; --mint:#a6d6c4; --blue:#86b9c8; --line:rgba(23,37,42,.2); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:"DM Sans",sans-serif; }
+    button, input { font:inherit; }
+    .masthead { min-height:100vh; padding:25px clamp(20px,5vw,80px) 38px; color:#f7f3eb; position:relative; overflow:hidden; display:flex; flex-direction:column; background:#193c42; }
+    .masthead::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(14,41,43,.95) 0%,rgba(18,54,56,.73) 45%,rgba(18,54,56,.2) 100%),url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=2200&q=85") center/cover; z-index:0; }
+    .masthead > * { position:relative; z-index:1; }
+    nav { display:flex; justify-content:space-between; align-items:center; padding-bottom:9vh; border-bottom:1px solid rgba(255,255,255,.28); }
+    .brand { display:flex; align-items:center; gap:11px; font:500 12px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .brand-mark { width:24px; height:24px; display:grid; place-items:center; border:1px solid var(--mint); color:var(--mint); border-radius:50%; font-size:15px; }
+    .nav-note { font:500 11px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:#c9dbd4; }
+    .lang-toggle { border:1px solid var(--mint); background:transparent; color:var(--mint); padding:6px 10px; cursor:pointer; font:500 10px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; border-radius:3px; transition:.2s; }
+    .lang-toggle:hover { background:var(--mint); color:#17252a; }
+    .hero { max-width:1000px; margin:auto 0; padding:8vh 0 4vh; }
+    .eyebrow, .section-label { display:flex; align-items:center; gap:10px; font:500 11px "DM Mono",monospace; letter-spacing:.11em; text-transform:uppercase; }
+    .eyebrow::before, .section-label::before { content:""; width:26px; height:1px; background:currentColor; }
+    .eyebrow { color:var(--mint); }
+    h1 { max-width:900px; margin:21px 0; font:600 clamp(48px,8.4vw,126px)/.92 "Playfair Display",serif; letter-spacing:-.045em; }
+    h1 em { color:var(--mint); font-weight:600; }
+    .intro { max-width:540px; color:#d9e2dc; font-size:clamp(16px,1.5vw,20px); line-height:1.5; }
+    .hero-bottom { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-top:auto; }
+    .hero-bottom p { margin:0; font:400 11px/1.55 "DM Mono",monospace; color:#c8d6d0; max-width:400px; }
+    .scroll-link { color:#fff; text-decoration:none; font:500 11px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.1em; display:flex; gap:9px; align-items:center; }
+    .scroll-link::after { content:"↓"; font-size:20px; color:var(--mint); }
+    main { padding:clamp(65px,9vw,130px) clamp(20px,5vw,80px); }
+    .overview { display:grid; grid-template-columns:1.25fr .75fr; gap:clamp(45px,10vw,150px); margin-bottom:110px; }
+    .overview h2 { margin:14px 0 0; font:600 clamp(34px,4.5vw,61px)/1.04 "Playfair Display",serif; letter-spacing:-.035em; }
+    .overview h2 span { color:var(--coral); }
+    .overview-copy { align-self:end; font-size:16px; line-height:1.65; }
+    .overview-copy p { margin:0; }
+    .statistics { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); margin-bottom:105px; }
+    .stat { padding:22px 18px 24px 0; border-right:1px solid var(--ink); }
+    .stat:not(:first-child) { padding-left:20px; }
+    .stat:last-child { border:0; }
+    .stat-number { display:block; font:600 clamp(34px,4vw,57px)/1 "Playfair Display",serif; }
+    .stat-label { display:block; margin-top:7px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.08em; }
+    .archive-head { display:flex; justify-content:space-between; gap:20px; align-items:end; padding-bottom:20px; border-bottom:1px solid var(--ink); }
+    .archive-head h2 { margin:12px 0 0; font:600 clamp(34px,5vw,68px)/1 "Playfair Display",serif; letter-spacing:-.04em; }
+    .archive-head h2 i { color:var(--coral); }
+    .result-count { font:500 11px "DM Mono",monospace; text-transform:uppercase; white-space:nowrap; }
+    .controls { display:grid; grid-template-columns:1fr auto; gap:20px; align-items:start; padding:22px 0 29px; border-bottom:1px solid var(--line); }
+    .filter-set { display:flex; flex-wrap:wrap; gap:7px; }
+    .filter { border:1px solid var(--line); background:transparent; color:var(--ink); padding:8px 11px; border-radius:0; cursor:pointer; font:500 10px "DM Mono",monospace; letter-spacing:.045em; text-transform:uppercase; transition:.2s; }
+    .filter:hover, .filter.active { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+    .search { width:190px; border:0; border-bottom:1px solid var(--ink); outline:0; background:transparent; padding:8px 0; border-radius:0; color:var(--ink); font-size:13px; }
+    .search::placeholder { color:#667273; }
+    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+    .project { min-height:256px; display:flex; flex-direction:column; padding:24px 22px 22px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); cursor:pointer; transition:background .22s,padding .22s; }
+    .project:nth-child(3n+2),.project:nth-child(3n+3) { padding-left:22px; }
+    .project:nth-child(3n) { border-right:0; }
+    .project:hover { background:#e7dfd1; padding-top:19px; }
+    .project-top { display:flex; justify-content:space-between; gap:8px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.07em; color:#516065; }
+    .region-dot { width:8px; height:8px; margin-top:1px; border-radius:50%; background:var(--region-color,var(--coral)); flex:none; }
+    .project h3 { margin:32px 0 9px; font:600 clamp(23px,2.3vw,31px)/1.05 "Playfair Display",serif; letter-spacing:-.025em; }
+    .project p { margin:0; font-size:13px; line-height:1.5; color:#46565a; }
+    .project-footer { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:17px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+    .project-arrow { font-size:19px; line-height:10px; color:var(--coral); }
+    .empty { grid-column:1/-1; padding:55px 0; font:600 26px "Playfair Display",serif; }
+    .regions { display:grid; grid-template-columns:.8fr 1.2fr; gap:50px; margin-top:120px; padding-top:25px; border-top:1px solid var(--ink); }
+    .regions h2 { margin:13px 0 0; font:600 clamp(33px,4vw,53px)/1 "Playfair Display",serif; letter-spacing:-.035em; }
+    .map { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; align-self:end; }
+    .region-card { min-height:135px; display:flex; flex-direction:column; justify-content:space-between; padding:14px; background:var(--card-color); cursor:pointer; border:1px solid rgba(23,37,42,.2); transition:transform .2s; }
+    .region-card:hover { transform:translateY(-5px); }
+    .region-card b { font:600 22px "Playfair Display",serif; }
+    .region-card span { font:500 9px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+    footer { display:flex; justify-content:space-between; gap:25px; padding:22px clamp(20px,5vw,80px); color:#e9eee9; background:var(--ink); font:400 11px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+    dialog { width:min(680px,calc(100% - 32px)); padding:0; border:0; color:var(--ink); background:var(--paper); box-shadow:0 20px 80px rgba(0,0,0,.4); }
+    dialog::backdrop { background:rgba(15,34,36,.72); backdrop-filter:blur(3px); }
+    .modal { padding:clamp(26px,5vw,52px); }
+    .modal-close { float:right; width:31px; height:31px; border:1px solid var(--ink); border-radius:50%; background:transparent; cursor:pointer; font-size:18px; }
+    .modal-meta { color:#526165; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.08em; }
+    .modal h2 { margin:22px 0 16px; max-width:500px; font:600 clamp(37px,6vw,63px)/.98 "Playfair Display",serif; letter-spacing:-.04em; }
+    .modal h3 { margin:27px 0 8px; font:500 10px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--coral); }
+    .modal p { margin:0; max-width:580px; font-size:15px; line-height:1.6; }
+    @media (max-width:760px) { nav { padding-bottom:55px; } .nav-note { display:none; } .masthead { min-height:740px; } .hero-bottom { align-items:start; flex-direction:column; } .overview,.regions { grid-template-columns:1fr; gap:28px; } .overview { margin-bottom:75px; } .statistics { margin-bottom:75px; } .controls { grid-template-columns:1fr; } .search { width:100%; } .project-grid { grid-template-columns:1fr; } .project,.project:nth-child(3n+2),.project:nth-child(3n+3) { padding-left:0; border-right:0; } .map { grid-template-columns:repeat(2,1fr); } .region-card { min-height:105px; } footer { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <nav><div class="brand"><span class="brand-mark">/</span> Global Voice Systems</div><div style="display:flex;gap:20px;align-items:center"><button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button><span class="nav-note">Portfolio / 2000 - Present</span></div></nav>
+    <div class="hero">
+      <div class="eyebrow">Enterprise conversational systems</div>
+      <h1>Diseñando cómo el mundo <em>conversa.</em></h1>
+      <p class="intro">Una trayectoria en Voice AI, biometría y automatización conversacional para operaciones críticas a escala global.</p>
+    </div>
+    <div class="hero-bottom"><p>Desde banca y salud hasta aviación y servicios públicos: sistemas de voz diseñados para ser comprendidos cuando importa.</p><a class="scroll-link" href="#archivo">Explorar archivo</a></div>
+  </header>
+  <main>
+    <section class="overview"><div><div class="section-label">El trabajo</div><h2>La voz como <span>infraestructura</span> de confianza.</h2></div><div class="overview-copy"><p>Arquitectura, diseño lingüístico y optimización de experiencias que conectan a millones de personas con servicios esenciales. Un recorrido por mercados, idiomas y desafíos de conversación reales.</p></div></section>
+    <section class="statistics" aria-label="Resumen del portafolio"><div class="stat"><span class="stat-number">50+</span><span class="stat-label">Sistemas empresariales</span></div><div class="stat"><span class="stat-number">5</span><span class="stat-label">Regiones activas</span></div><div class="stat"><span class="stat-number">12</span><span class="stat-label">Industrias atendidas</span></div></section>
+    <section id="archivo">
+      <div class="archive-head"><div><div class="section-label">Archivo seleccionado</div><h2>Proyectos en <i>conversación</i></h2></div><span class="result-count" id="resultCount"></span></div>
+      <div class="controls"><div><div class="filter-set" id="sectorFilters" aria-label="Filtrar por sector"></div><div class="filter-set" id="regionFilters" aria-label="Filtrar por región" style="margin-top:7px"></div></div><input class="search" id="search" type="search" placeholder="Buscar proyecto" aria-label="Buscar proyecto" /></div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+    <section class="regions"><div><div class="section-label">Alcance geográfico</div><h2>Una práctica local con perspectiva mundial.</h2></div><div class="map" id="regionMap"></div></section>
+  </main>
+  <footer><span>Voice AI &amp; Conversational Systems</span><span>Global enterprise portfolio</span><span>© 2026</span></footer>
+  <dialog id="projectDialog"><div class="modal"><button class="modal-close" id="closeDialog" aria-label="Cerrar detalle">×</button><div class="modal-meta" id="modalMeta"></div><h2 id="modalTitle"></h2><h3>Alcance</h3><p id="modalScope"></p><h3>Tecnología y desafío</h3><p id="modalTech"></p></div></dialog>
+  <script>
+    const i18n = {
+      es: {
+        eyebrow: 'Enterprise conversational systems',
+        h1: 'Diseñando cómo el mundo <em>conversa.</em>',
+        intro: 'Una trayectoria en Voice AI, biometría y automatización conversacional para operaciones críticas a escala global.',
+        heroBottom: 'Desde banca y salud hasta aviación y servicios públicos: sistemas de voz diseñados para ser comprendidos cuando importa.',
+        scrollLink: 'Explorar archivo',
+        workLabel: 'El trabajo',
+        workH2: 'La voz como <span>infraestructura</span> de confianza.',
+        workCopy: 'Arquitectura, diseño lingüístico y optimización de experiencias que conectan a millones de personas con servicios esenciales. Un recorrido por mercados, idiomas y desafíos de conversación reales.',
+        stat1: '50+',
+        stat1Label: 'Sistemas empresariales',
+        stat2: '5',
+        stat2Label: 'Regiones activas',
+        stat3: '12',
+        stat3Label: 'Industrias atendidas',
+        archiveLabel: 'Archivo seleccionado',
+        archiveH2: 'Proyectos en <i>conversación</i>',
+        filterSectorLabel: 'Filtrar por sector',
+        filterRegionLabel: 'Filtrar por región',
+        searchPlaceholder: 'Buscar proyecto',
+        regionsLabel: 'Alcance geográfico',
+        regionsH2: 'Una práctica local con perspectiva mundial.',
+        empty: 'No hay resultados para esta exploración.',
+        modalScope: 'Alcance',
+        modalTech: 'Tecnología y desafío',
+        closeModal: 'Cerrar detalle',
+        resultCount: (shown, total) => `${shown} de ${total} proyectos`
+      },
+      en: {
+        eyebrow: 'Enterprise conversational systems',
+        h1: 'Designing how the world <em>converses.</em>',
+        intro: 'A trajectory in Voice AI, voice biometrics, and conversational automation for mission-critical operations at global scale.',
+        heroBottom: 'From banking and healthcare to aviation and public services: voice systems designed to be understood when it matters.',
+        scrollLink: 'Explore archive',
+        workLabel: 'The work',
+        workH2: 'Voice as <span>infrastructure</span> of trust.',
+        workCopy: 'Architecture, linguistic design, and optimization of experiences that connect millions of people with essential services. A journey through markets, languages, and real-world conversation challenges.',
+        stat1: '50+',
+        stat1Label: 'Enterprise systems',
+        stat2: '5',
+        stat2Label: 'Active regions',
+        stat3: '12',
+        stat3Label: 'Industries served',
+        archiveLabel: 'Selected archive',
+        archiveH2: 'Projects in <i>conversation</i>',
+        filterSectorLabel: 'Filter by sector',
+        filterRegionLabel: 'Filter by region',
+        searchPlaceholder: 'Search project',
+        regionsLabel: 'Geographic scope',
+        regionsH2: 'Local practice with global perspective.',
+        empty: 'No results for this exploration.',
+        modalScope: 'Core Scope',
+        modalTech: 'Technology & Challenges',
+        closeModal: 'Close detail',
+        resultCount: (shown, total) => `${shown} of ${total} projects`
+      }
+    };
+
+    const i18nProjects = {
+      es: {
+        Banca: 'Banca',
+        Telecom: 'Telecom',
+        Logística: 'Logística',
+        Media: 'Media',
+        Tecnología: 'Tecnología',
+        Salud: 'Salud',
+        Seguros: 'Seguros',
+        'Sector público': 'Sector público',
+        Servicios: 'Servicios',
+        Viajes: 'Viajes',
+        Hostelería: 'Hostelería',
+        Automoción: 'Automoción'
+      },
+      en: {
+        Banca: 'Banking',
+        Telecom: 'Telecommunications',
+        Logística: 'Logistics',
+        Media: 'Media',
+        Tecnología: 'Technology',
+        Salud: 'Healthcare',
+        Seguros: 'Insurance',
+        'Sector público': 'Public Sector',
+        Servicios: 'Services',
+        Viajes: 'Travel',
+        Hostelería: 'Hospitality',
+        Automoción: 'Automotive'
+      }
+    };
+
+    let currentLang = 'es';
+    
+    function updateUI() {
+      const t = i18n[currentLang];
+      
+      document.querySelector('.eyebrow').textContent = t.eyebrow;
+      document.querySelector('h1').innerHTML = t.h1;
+      document.querySelector('.intro').textContent = t.intro;
+      document.querySelector('.hero-bottom p').textContent = t.heroBottom;
+      document.querySelector('.scroll-link').textContent = t.scrollLink;
+      
+      document.querySelectorAll('.section-label')[0].textContent = t.workLabel;
+      document.querySelectorAll('h2')[0].innerHTML = t.workH2;
+      document.querySelector('.overview-copy p').textContent = t.workCopy;
+      
+      document.querySelectorAll('.stat-number')[0].textContent = t.stat1;
+      document.querySelectorAll('.stat-label')[0].textContent = t.stat1Label;
+      document.querySelectorAll('.stat-number')[1].textContent = t.stat2;
+      document.querySelectorAll('.stat-label')[1].textContent = t.stat2Label;
+      document.querySelectorAll('.stat-number')[2].textContent = t.stat3;
+      document.querySelectorAll('.stat-label')[2].textContent = t.stat3Label;
+      
+      document.querySelectorAll('.section-label')[1].textContent = t.archiveLabel;
+      document.querySelector('.archive-head h2').innerHTML = t.archiveH2;
+      
+      document.querySelectorAll('[aria-label*="Filtrar"]')[0].setAttribute('aria-label', t.filterSectorLabel);
+      document.querySelectorAll('[aria-label*="Filtrar"]')[1].setAttribute('aria-label', t.filterRegionLabel);
+      document.querySelector('#search').placeholder = t.searchPlaceholder;
+      
+      document.querySelectorAll('.section-label')[2].textContent = t.regionsLabel;
+      document.querySelectorAll('.regions h2')[0].innerHTML = t.regionsH2;
+      
+      document.querySelector('#closeDialog').setAttribute('aria-label', t.closeModal);
+      
+      document.querySelector('#langToggle').textContent = currentLang === 'es' ? 'EN' : 'ES';
+      
+      // Traducir botones de filtro de sectores
+      const sectorTrans = i18nProjects[currentLang];
+      document.querySelectorAll('#sectorFilters .filter').forEach(btn => {
+        const label = btn.dataset.value;
+        if(label === 'Todos') btn.textContent = currentLang === 'es' ? 'Todos' : 'All';
+        else btn.textContent = sectorTrans[label] || label;
+      });
+      
+      render();
+    }
+
+    document.querySelector('#langToggle').addEventListener('click', () => {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      updateUI();
+    });
+
+    const projects = [
+      ['Bank of America','Banca','Norteamérica','Plataforma IVR bilingüe de autoservicio para operaciones bancarias minoristas a escala multimillonaria.','NLU, GRXML, diccionarios fonéticos y SLM para inglés y español; ciclos de optimización bajo tráfico productivo.'],
+      ['Banamex','Banca','LATAM','Iniciativas de voz de extremo a extremo: planificación, especificación VUI y endurecimiento de producción.','ASR y gramáticas de español mexicano, entregas escalonadas y control de calidad lingüística.'],
+      ['Fidelity Investments','Banca','Norteamérica','Enrutamiento por intención y soporte NINA para inversiones, brokerage y cuentas de retiro.','Gramáticas financieras GRXML, XML de intención, flujos de confirmación y regresión automatizada con Perl.'],
+      ['JPMorgan Chase','Banca','Norteamérica','IVR corporativo y de consumo de alta disponibilidad conectado a expedientes financieros.','Optimización No-Input/No-Match e integraciones seguras entre Nuance Recognizer y APIs bancarias.'],
+      ['Wells Fargo','Banca','Norteamérica','Portal conversacional para líneas de crédito, hipotecas y cuentas personales.','VoiceXML dinámico según segmento de cliente y datos obtenidos al inicio de llamada.'],
+      ['Vanguard','Banca','Norteamérica','Soporte a inversores y motor de consultas de cotizaciones de mercado por lenguaje natural.','Gramáticas dinámicas para miles de empresas y tickers, con verificación estricta de transferencias.'],
+      ['BBVA','Banca','Europa','Capas conversacionales NINA para interacciones bancarias en español europeo.','Paquetes GRXML complejos, entrenamiento NLU, XML y regresión sobre audio real.'],
+      ['HSBC','Banca','Global','Despliegue multinacional de biometría de voz activa y pasiva, incluido HSBC México.','VocalPassword, FreeSpeech, sincronización de huellas de voz y cumplimiento regulatorio transfronterizo.'],
+      ['Banco Santander','Banca','LATAM','Despliegue pionero de autenticación activa “mi voz es mi contraseña” en México.','VocalPassword, fonética regional, optimización FAR/FRR y transición desde DTMF.'],
+      ['Banco Itaú','Banca','LATAM','Marco IVR transfronterizo para portugués brasileño y español latinoamericano.','Ajuste acústico paralelo, diccionarios regionales, biometría y arquitectura de autenticación.'],
+      ['Banorte','Banca','LATAM','Autenticación biométrica para pensionados, reduciendo visitas a sucursal y fraude.','Adaptación acústica para español mexicano de adultos mayores y validación de baja fricción.'],
+      ['Charles Schwab','Banca','Norteamérica','Portal conversacional de trading y gestión de patrimonio para navegación rápida.','Sincronización de baja latencia entre motor ASR y APIs de mercado volátiles. Tuning acústico para comandos de traders experimentados.'],
+      ['Banco Mediolanum','Banca','Europa','Diseño, despliegue y ejecución operacional del asistente NINA para aplicaciones bancarias conversacionales.','Gestión de repositorios de audio masivos, rutinas de logging y parsing, capas GRXML localizado bajo tráfico telefónico.'],
+      ['Lloyds','Banca','Europa','Diseño arquitectónico e implementación del marco NINA para operaciones bancarias minoristas regionales.','Catálogo extenso de gramáticas GRXML optimizadas para acentos británicos regionales y plantillas de análisis NLU.'],
+      ['RBS (Royal Bank of Scotland)','Banca','Europa','Diseño, desarrollo y optimización acústica del asistente NINA para sistemas bancarios automatizados.','Arquitecturas GRXML extensas, conjuntos de datos de validación de audio para variantes de idioma británico.'],
+      ['Garanti Bank','Banca','Europa','Diseño e implementación arquitectónica del marco de aplicación de voz conversacional.','Gramáticas GRXML y activos de turco con vocabularios expandidos, definiciones XML y análisis de conjuntos de audio.'],
+      ['ING Netherlands','Banca','Europa','Implementación del marco asistente conversacional NINA en plataforma de banca móvil controlada por voz.','Gramáticas GRXML localizadas, lógica XML estructurada, utilidades Perl y análisis de precisión de palabras.'],
+      ['Bancomer','Banca','LATAM','Módulo de validación de texto para capa de biometría de voz dentro de plataforma bancaria.','Motor de validación biométrica de voz, parsing de fonética regional mexicana y flujos de autenticación seguros.'],
+      ['Banco Bradesco','Banca','LATAM','Arquitectura de interacción de voz de alta densidad para una de las mayores bases de clientes de Sudamérica.','Reglas de síntesis TTS finamente ajustadas para mantener prosodia natural durante lectura dinámica de cadenas alfanuméricas.'],
+      ['Banreservas','Banca','LATAM','Implementación de sistema de biometría de voz para centro de contacto de banco primario del Caribe.','Biometría de voz afinada para español dominicano, patrones de habla regional y velocidades de habla elevadas.'],
+      ['Scotiabank','Banca','LATAM','Implementación de sistema de biometría de voz para Scotiabank México.','Biometría afinada para español mexicano, adaptación fonética regional y flujos de autenticación segura.'],
+      ['Telefónica / Movistar','Telecom','LATAM','Gateway de registro de voz de alta capacidad para el registro nacional RENAUT.','Gramáticas GRXML/ABNF alfanuméricas, VUI resiliente y validación masiva de CURP y RFC.'],
+      ['AT&T','Telecom','Norteamérica','Reconocimiento de direcciones en español para atención bilingüe de telecomunicaciones.','Modelo NLU híbrido, diccionarios fonéticos y gramáticas para entradas lingüísticas mezcladas.'],
+      ['T-Mobile','Telecom','Norteamérica','Modernización de canales conversacionales de soporte al cliente.','Configuración y optimización de NLU, GRXML y diccionarios para enrutamiento de baja latencia.'],
+      ['Orange','Telecom','Europa','Sistema de call steering para soporte técnico, paquetes convergentes y facturación.','Clasificación de intención y optimización de enrutamiento para reducir transferencias erróneas.'],
+      ['MCI','Telecom','Norteamérica','Despliegue conversacional de enrutamiento automatizado para divisiones de larga distancia nacional e internacional.','Configuración y optimización de capas lingüísticas en español, auditoría de diálogo y reducción de desconocimientos.'],
+      ['Cox Communications / Charter (Spectrum) / Comcast (Xfinity)','Telecom','Norteamérica','Despliegue de activos de habla automatizados para servicio al cliente de telecom y suscriptores.','Configuración y estabilización de capas lingüísticas en español, refinamiento de especificaciones VUI.'],
+      ['Genesys','Telecom','Global','Tareas de soporte conectadas a contextos de plataforma de voz Genesys.','Consideraciones de integración de plataforma, compatibilidad de versiones y comportamiento de implementación controlada.'],
+      ['Allus','Servicios','LATAM','Modelo NLU para reconocer matrículas colombianas en servicio automatizado.','Pipeline de entrenamiento con más de 130.000 registros y automatización de corpus fonético.'],
+      ['Centrelink','Sector público','APAC','Portal de voz de alta seguridad para bienestar, pensiones y asistencia ciudadana.','Ajuste de motor biométrico, calibración matemática y evaluación sistemática de datos.'],
+      ['Xanavi','Automoción','APAC','Trabajo de ciencia del habla para escenarios de comandos de dominio específico.','Modelado de gramáticas y tuning de rendimiento para interacciones restringidas.'],
+      ['FedEx','Logística','Global','Sistema conversacional insignia para carga aérea, envíos express y logística corporativa.','Matrices gramaticales para guías alfanuméricas, parsing NLU de dirección y ruteo de recolección.'],
+      ['Amtrak','Viajes','Norteamérica','Optimización del asistente de voz ferroviario para horarios y billetes.','Tuning de gramáticas con análisis de llamadas, nombres de destinos y diversidad acústica.'],
+      ['American Airlines','Viajes','Global','IVR conversacional bilingüe para reservas, itinerarios y viajeros frecuentes.','NLU español, diálogos multi-slot, diccionarios globales de aeropuertos y PNRs.'],
+      ['Emirates Airlines','Viajes','Global','Capa de voz NINA para experiencias premium de viajeros internacionales.','Más de 100 marcos GRXML, perfiles de inglés británico y análisis acústico.'],
+      ['US Airways','Viajes','Norteamérica','Diseño e implementación de habla conversacional para sistema de portal de vuelos automatizado.','Activos GRXML y diccionarios fonéticos para terminología aeroportuaria, herramientas Python para análisis de habla.'],
+      ['Continental Airlines / Delta Air Lines / Southwest Airlines / United Airlines','Viajes','Global','Primer sistema de información de vuelos completamente bilingüe inglés-español por voz natural.','Módulos de reconocimiento alfanumérico de alta precisión, estructuras de diálogo conversacional resilientes a ruido.'],
+      ['DirecTV','Media','Norteamérica','Interacción por voz incorporada al set-top box para facturación, diagnósticos y contenido.','Diccionarios fonéticos en español y NLU cruzado para títulos en inglés y pronunciaciones localizadas.'],
+      ['Travel Inn','Hostelería','Norteamérica','Soporte operacional para aplicación de voz hospitalaria con transcrpciones y actualizaciones de gramáticas.','Ciclos de tuning ASR basados en logs, ajustes recurrentes de calidad y minimización de disrupciones operacionales.'],
+      ['Dell Technologies','Tecnología','Global','Automatización de líneas de soporte multilingüe y generación de tickets de servicio técnico.','Estrategia de motor lingüístico, modelos de vocabulario y marcos de regresión automatizada.'],
+      ['FPL (Florida Power & Light)','Servicios','Norteamérica','Implementación de aplicación conversacional para automatizar consultas de servicios y atención al cliente.','Desarrollo y optimización técnica de componentes de reconocimiento de habla para identificación de números telefónicos.'],
+      ['GE','Tecnología','Europa','Soporte para iniciativas de voz de GE incluyendo especificaciones de gramáticas y pruebas.','Modelo de entrega mixto combinando gobernanza de proyectos y soporte de gramáticas con alineación transfuncional.'],
+      ['GEICO','Seguros','Norteamérica','Implementación y optimización técnica de componentes de voz conversacional para automatización de servicios.','Refinamiento de activos de habla bajo entornos de telefonía de alta capacidad para enrutamiento confiable.'],
+      ['IBM','Tecnología','Global','Automatización de voz empresarial combinando Watson NLU y Nuance TTS.','Integración de interpretación semántica, orquestación de diálogo y síntesis natural.'],
+      ['The Hartford','Seguros','Norteamérica','Análisis OMNI en español con foco en mejoras de calidad mediante logs y transcripciones.','Optimización de ASR impulsada por diagnóstico en contextos de servicios en vivo.'],
+      ['CVS Health','Salud','Norteamérica','Portal farmacéutico de alto volumen para recetas, renovaciones y ruteo a sucursales.','GenAI para desambiguación de medicamentos bajo requerimientos de cumplimiento HIPAA.'],
+      ['Walgreens','Salud','Norteamérica','Automatización bilingüe de citas de inmunización durante la pandemia.','Flujos inglés/español, validación de dosis y actualizaciones en tiempo real bajo picos de tráfico.'],
+      ['Kaiser Permanente / Humana / Pfizer','Salud','Norteamérica','Portales conversacionales para gestión de redes, verificación de cobertura y citas clínicas.','Cumplimiento total de regulaciones HIPAA durante recopilación de datos y verificación automatizada de miembros.'],
+      ['HMRC','Sector público','Europa','Prototipo omnicanal para la administración tributaria del Reino Unido.','Esquemas GRXML escalables, XML y automatización Perl para parámetros de enrutamiento.'],
+      ['New York City 311','Sector público','Norteamérica','Red conversacional ciudadana para derivar consultas a cientos de departamentos municipales.','Integración pionera de GenAI en IVR legado, parsing semántico y clarificación multi-turno.'],
+      ['ICE Costa Rica / Unisys','Servicios','LATAM','Gateway centralizado de voz para la telco nacional y soporte de servicios públicos.','Modelos acústicos costarricenses, vocabulario geográfico e interoperabilidad con sistemas Unisys.'],
+      ['Ford Motor Company','Automoción','Global','Capas de voz para Ford SYNC en vehículos de mercados hispanohablantes.','Vocabulario y gramáticas en español optimizados para motores acústicos con memoria limitada.'],
+      ['MetLife','Seguros','Norteamérica','Portal de autoservicio y enrutamiento para pólizas, reclamos y pagos.','Arquitecturas NLU, VUI sensible y privacidad para tráfico concurrente de alta capacidad.']
+    ].map(([name, sector, region, scope, tech]) => ({name, sector, region, scope, tech}));
+    const colors = { 'Norteamérica':'#e65d45', 'LATAM':'#83b8c7', 'Europa':'#a6d6c4', 'APAC':'#e7b86b', 'Global':'#bba6d6' };
+    const sectorFilters = document.querySelector('#sectorFilters'), regionFilters = document.querySelector('#regionFilters'), grid = document.querySelector('#projectGrid');
+    const sectors = ['Todos', ...new Set(projects.map(p => p.sector))], regions = ['Todas', ...new Set(projects.map(p => p.region))];
+    let activeSector = 'Todos', activeRegion = 'Todas', query = '';
+    function button(label, group, action) { const b=document.createElement('button'); b.className='filter'; b.textContent=label; b.dataset.value=label; b.addEventListener('click',()=>action(label)); group.append(b); }
+    sectors.forEach(s => button(s, sectorFilters, value => {activeSector=value; render();}));
+    regions.forEach(r => button(r, regionFilters, value => {activeRegion=value; render();}));
+    function render() {
+      document.querySelectorAll('#sectorFilters .filter').forEach(b=>b.classList.toggle('active',b.dataset.value===activeSector));
+      document.querySelectorAll('#regionFilters .filter').forEach(b=>b.classList.toggle('active',b.dataset.value===activeRegion));
+      const shown=projects.filter(p=>(activeSector==='Todos'||p.sector===activeSector)&&(activeRegion==='Todas'||p.region===activeRegion)&&`${p.name} ${p.sector} ${p.region}`.toLowerCase().includes(query));
+      const t = i18n[currentLang];
+      document.querySelector('#resultCount').textContent=t.resultCount(shown.length, projects.length);
+      const sectorTrans = i18nProjects[currentLang];
+      grid.innerHTML = shown.length ? shown.map((p,i)=>`<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}"><div class="project-top"><span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`).join('') : `<div class="empty">${t.empty}</div>`;
+      document.querySelectorAll('.project').forEach(card=>{ card.addEventListener('click',()=>openProject(+card.dataset.index)); card.addEventListener('keydown',e=>{if(e.key==='Enter')openProject(+card.dataset.index)}); });
+    }
+    const dialog=document.querySelector('#projectDialog');
+    function openProject(index) { 
+      const p=projects[index]; 
+      const t = i18n[currentLang];
+      document.querySelector('#modalMeta').textContent=`${i18nProjects[currentLang][p.sector]||p.sector} / ${p.region}`; 
+      document.querySelector('#modalTitle').textContent=p.name; 
+      document.querySelectorAll('.modal h3')[0].textContent = t.modalScope;
+      document.querySelector('#modalScope').textContent=p.scope; 
+      document.querySelectorAll('.modal h3')[1].textContent = t.modalTech;
+      document.querySelector('#modalTech').textContent=p.tech; 
+      dialog.showModal(); 
+    }
+    document.querySelector('#closeDialog').addEventListener('click',()=>dialog.close());
+    document.querySelector('#search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render();});
+    const map=document.querySelector('#regionMap');
+    Object.entries(colors).forEach(([region,color])=>{const count=projects.filter(p=>p.region===region).length;const el=document.createElement('button');el.className='region-card';el.style.setProperty('--card-color',color);el.innerHTML=`<b>${count}</b><span>${region}</span>`;el.addEventListener('click',()=>{activeRegion=region;render();document.querySelector('#archivo').scrollIntoView({behavior:'smooth'});});map.append(el);});
+    
+    updateUI();
+  </script>
+</body>
+</html>
