@@ -56,17 +56,20 @@
     .filter:hover, .filter.active { background:var(--ink); color:var(--paper); border-color:var(--ink); }
     .search { width:190px; border:0; border-bottom:1px solid var(--ink); outline:0; background:transparent; padding:8px 0; border-radius:0; color:var(--ink); font-size:13px; }
     .search::placeholder { color:#667273; }
-    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); }
-    .project { min-height:256px; display:flex; flex-direction:column; padding:24px 22px 22px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); cursor:pointer; transition:background .22s,padding .22s; }
-    .project:nth-child(3n+2),.project:nth-child(3n+3) { padding-left:22px; }
-    .project:nth-child(3n) { border-right:0; }
-    .project:hover { background:#e7dfd1; padding-top:19px; }
-    .project-top { display:flex; justify-content:space-between; gap:8px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.07em; color:#516065; }
-    .region-dot { width:8px; height:8px; margin-top:1px; border-radius:50%; background:var(--region-color,var(--coral)); flex:none; }
-    .project h3 { margin:32px 0 9px; font:600 clamp(23px,2.3vw,31px)/1.05 "Playfair Display",serif; letter-spacing:-.025em; }
-    .project p { margin:0; font-size:13px; line-height:1.5; color:#46565a; }
-    .project-footer { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:17px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
-    .project-arrow { font-size:19px; line-height:10px; color:var(--coral); }
+    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; padding-bottom:40px; }
+    .project { min-height:340px; display:flex; flex-direction:column; padding:24px; border:1px solid var(--line); background:#fdfbf8; cursor:pointer; transition:all .3s cubic-bezier(.4,0,.2,1); border-radius:4px; }
+    .project:hover { transform:translateY(-8px); background:#f7f2e8; box-shadow:0 15px 40px rgba(23,37,42,.12); border-color:var(--region-color,var(--coral)); }
+    .project-logo { width:100%; height:52px; object-fit:contain; object-position:left; margin-bottom:16px; opacity:.85; }
+    .project-top { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:14px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.07em; color:#516065; }
+    .project-sector { display:flex; align-items:center; gap:6px; }
+    .sector-icon { font-size:16px; }
+    .region-dot { width:10px; height:10px; margin-top:0; border-radius:50%; background:var(--region-color,var(--coral)); flex:none; box-shadow:0 0 0 3px rgba(230,93,69,.15); }
+    .project h3 { margin:0 0 8px; font:600 clamp(19px,2vw,24px)/1.2 "Playfair Display",serif; letter-spacing:-.025em; color:var(--ink); }
+    .project p { margin:0 0 12px; font-size:13px; line-height:1.5; color:#46565a; flex:1; }
+    .project-tech { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }
+    .tech-badge { font:500 9px "DM Mono",monospace; background:rgba(230,93,69,.08); color:var(--coral); padding:4px 8px; border-radius:2px; }
+    .project-footer { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:12px; border-top:1px solid var(--line); font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+    .project-arrow { font-size:16px; line-height:10px; color:var(--coral); }
     .empty { grid-column:1/-1; padding:55px 0; font:600 26px "Playfair Display",serif; }
     .regions { display:grid; grid-template-columns:.8fr 1.2fr; gap:50px; margin-top:120px; padding-top:25px; border-top:1px solid var(--ink); }
     .regions h2 { margin:13px 0 0; font:600 clamp(33px,4vw,53px)/1 "Playfair Display",serif; letter-spacing:-.035em; }
@@ -308,6 +311,18 @@
       ['MetLife','Seguros','Norteamérica','Portal de autoservicio y enrutamiento para pólizas, reclamos y pagos.','Arquitecturas NLU, VUI sensible y privacidad para tráfico concurrente de alta capacidad.']
     ].map(([name, sector, region, scope, tech]) => ({name, sector, region, scope, tech}));
     const colors = { 'Norteamérica':'#e65d45', 'LATAM':'#83b8c7', 'Europa':'#a6d6c4', 'APAC':'#e7b86b', 'Global':'#bba6d6' };
+    const sectorIcons = { 'Banca':'🏦', 'Telecom':'📱', 'Logística':'📦', 'Viajes':'✈️', 'Media':'📺', 'Tecnología':'⚙️', 'Salud':'🏥', 'Seguros':'🛡️', 'Sector público':'🏛️', 'Servicios':'🔧', 'Hostelería':'🏨', 'Automoción':'🚗' };
+    
+    function getCompanyLogoUrl(name) {
+      const domainMap = {'Bank of America':'bankofamerica.com','Banamex':'banamex.com','Fidelity':'fidelity.com','JPMorgan':'jpmorganchase.com','Wells Fargo':'wellsfargo.com','Vanguard':'vanguard.com','BBVA':'bbva.com','HSBC':'hsbc.com','Santander':'santander.com','Itaú':'itau.com.br','Banorte':'banorte.com','Charles Schwab':'schwab.com','Mediolanum':'mediolanum.com','Lloyds':'lloydsbank.com','RBS':'rbs.com','Garanti':'garantibbva.com','ING':'ing.com','Bancomer':'bancomer.com','Bradesco':'bradesco.com','Banreservas':'banreservas.com','Scotiabank':'scotiabank.com','Telefónica':'telefonica.com','AT&T':'att.com','T-Mobile':'t-mobile.com','Orange':'orange.com','MCI':'mci.com','Cox':'cox.com','Charter':'charter.com','Comcast':'comcast.com','Genesys':'genesys.com','Allus':'allus.co','Centrelink':'centrelink.gov.au','Xanavi':'xanavi.jp','FedEx':'fedex.com','Amtrak':'amtrak.com','American Airlines':'aa.com','Emirates':'emirates.com','US Airways':'usairways.com','Continental':'continental.com','Delta':'delta.com','Southwest':'southwest.com','United':'united.com','DirecTV':'directv.com','Travel Inn':'travelodge.com','Dell':'dell.com','FPL':'fpl.com','GE':'ge.com','GEICO':'geico.com','IBM':'ibm.com','The Hartford':'thehartford.com','CVS':'cvs.com','Walgreens':'walgreens.com','Kaiser':'kaiserpermanente.org','Humana':'humana.com','Pfizer':'pfizer.com','HMRC':'gov.uk','NYC':'nyc.gov','ICE':'ice.cr','Unisys':'unisys.com','Ford':'ford.com','MetLife':'metlife.com'};
+      return domainMap[name] ? `https://logo.clearbit.com/${domainMap[name]}?size=150` : '';
+    }
+    
+    function getTechBadges(tech) {
+      const techs = tech.match(/\b(NLU|ASR|GRXML|XML|VoiceXML|TTS|Python|Perl|HIPAA|GenAI|ABNF|NLU|Watson|SYNC|VUI)\b/gi) || [];
+      return [...new Set(techs)].slice(0, 3).map(t => `<span class="tech-badge">${t.toUpperCase()}</span>`).join('');
+    }
+    
     const sectorFilters = document.querySelector('#sectorFilters'), regionFilters = document.querySelector('#regionFilters'), grid = document.querySelector('#projectGrid');
     const sectors = ['Todos', ...new Set(projects.map(p => p.sector))], regions = ['Todas', ...new Set(projects.map(p => p.region))];
     let activeSector = 'Todos', activeRegion = 'Todas', query = '';
@@ -321,7 +336,8 @@
       const t = i18n[currentLang];
       document.querySelector('#resultCount').textContent=t.resultCount(shown.length, projects.length);
       const sectorTrans = i18nProjects[currentLang];
-      grid.innerHTML = shown.length ? shown.map((p,i)=>`<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}"><div class="project-top"><span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`).join('') : `<div class="empty">${t.empty}</div>`;
+      const logoUrl = p => getCompanyLogoUrl(p.name);
+      grid.innerHTML = shown.length ? shown.map((p,i)=>{const logo=logoUrl(p);return `<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}"><img src="${logo}" alt="" class="project-logo" onerror="this.style.display='none'"><div class="project-top"><span class="project-sector"><span class="sector-icon">${sectorIcons[p.sector]||'○'}</span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-tech">${getTechBadges(p.tech)}</div><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`}).join('') : `<div class="empty">${t.empty}</div>`;
       document.querySelectorAll('.project').forEach(card=>{ card.addEventListener('click',()=>openProject(+card.dataset.index)); card.addEventListener('keydown',e=>{if(e.key==='Enter')openProject(+card.dataset.index)}); });
     }
     const dialog=document.querySelector('#projectDialog');
