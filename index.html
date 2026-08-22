@@ -59,7 +59,8 @@
     .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; padding-bottom:40px; }
     .project { min-height:340px; display:flex; flex-direction:column; padding:24px; border:1px solid var(--line); background:#fdfbf8; cursor:pointer; transition:all .3s cubic-bezier(.4,0,.2,1); border-radius:4px; }
     .project:hover { transform:translateY(-8px); background:#f7f2e8; box-shadow:0 15px 40px rgba(23,37,42,.12); border-color:var(--region-color,var(--coral)); }
-    .project-logo { width:100%; height:52px; object-fit:contain; object-position:left; margin-bottom:16px; opacity:.85; }
+    .project-logo { width:100%; height:60px; object-fit:contain; object-position:left center; margin-bottom:16px; opacity:.9; }
+    .project-logo-fallback { width:100%; height:60px; display:flex; align-items:center; justify-content:flex-start; margin-bottom:16px; background:rgba(230,93,69,.08); border-radius:2px; padding:0 12px; font:600 24px "Playfair Display",serif; color:var(--coral); }
     .project-top { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:14px; font:500 10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.07em; color:#516065; }
     .project-sector { display:flex; align-items:center; gap:6px; }
     .sector-icon { font-size:16px; }
@@ -314,12 +315,17 @@
     const sectorIcons = { 'Banca':'🏦', 'Telecom':'📱', 'Logística':'📦', 'Viajes':'✈️', 'Media':'📺', 'Tecnología':'⚙️', 'Salud':'🏥', 'Seguros':'🛡️', 'Sector público':'🏛️', 'Servicios':'🔧', 'Hostelería':'🏨', 'Automoción':'🚗' };
     
     function getCompanyLogoUrl(name) {
-      const domainMap = {'Bank of America':'bankofamerica.com','Banamex':'banamex.com','Fidelity':'fidelity.com','JPMorgan':'jpmorganchase.com','Wells Fargo':'wellsfargo.com','Vanguard':'vanguard.com','BBVA':'bbva.com','HSBC':'hsbc.com','Santander':'santander.com','Itaú':'itau.com.br','Banorte':'banorte.com','Charles Schwab':'schwab.com','Mediolanum':'mediolanum.com','Lloyds':'lloydsbank.com','RBS':'rbs.com','Garanti':'garantibbva.com','ING':'ing.com','Bancomer':'bancomer.com','Bradesco':'bradesco.com','Banreservas':'banreservas.com','Scotiabank':'scotiabank.com','Telefónica':'telefonica.com','AT&T':'att.com','T-Mobile':'t-mobile.com','Orange':'orange.com','MCI':'mci.com','Cox':'cox.com','Charter':'charter.com','Comcast':'comcast.com','Genesys':'genesys.com','Allus':'allus.co','Centrelink':'centrelink.gov.au','Xanavi':'xanavi.jp','FedEx':'fedex.com','Amtrak':'amtrak.com','American Airlines':'aa.com','Emirates':'emirates.com','US Airways':'usairways.com','Continental':'continental.com','Delta':'delta.com','Southwest':'southwest.com','United':'united.com','DirecTV':'directv.com','Travel Inn':'travelodge.com','Dell':'dell.com','FPL':'fpl.com','GE':'ge.com','GEICO':'geico.com','IBM':'ibm.com','The Hartford':'thehartford.com','CVS':'cvs.com','Walgreens':'walgreens.com','Kaiser':'kaiserpermanente.org','Humana':'humana.com','Pfizer':'pfizer.com','HMRC':'gov.uk','NYC':'nyc.gov','ICE':'ice.cr','Unisys':'unisys.com','Ford':'ford.com','MetLife':'metlife.com'};
-      return domainMap[name] ? `https://logo.clearbit.com/${domainMap[name]}?size=150` : '';
+      const domainMap = {'Bank of America':'bankofamerica.com','Banamex':'banamex.com','Fidelity':'fidelity.com','JPMorgan Chase':'jpmorganchase.com','Wells Fargo':'wellsfargo.com','Vanguard':'vanguard.com','BBVA':'bbva.com','HSBC':'hsbc.com','Santander':'santander.com','Banco Itaú':'itau.com.br','Banorte':'banorte.com','Charles Schwab':'schwab.com','Banco Mediolanum':'mediolanum.com','Lloyds':'lloydsbank.com','RBS':'rbs.co.uk','Garanti Bank':'garantibbva.com','ING':'ing.com','Bancomer':'bancomer.com','Banco Bradesco':'bradesco.com.br','Banreservas':'banreservas.com','Scotiabank':'scotiabank.com','Telefónica':'telefonica.com','AT&T':'att.com','T-Mobile':'t-mobile.com','Orange':'orange.com','MCI':'mci.com','Cox':'cox.com','Charter':'charter.com','Comcast':'comcast.com','Genesys':'genesys.com','Allus':'allus.co','Centrelink':'centrelink.gov.au','Xanavi':'xanavi.jp','FedEx':'fedex.com','Amtrak':'amtrak.com','American Airlines':'aa.com','Emirates':'emirates.com','US Airways':'usairways.com','Continental':'continental.com','Delta':'delta.com','Southwest':'southwest.com','United':'united.com','DirecTV':'directv.com','Travel Inn':'travelodge.com','Dell':'dell.com','FPL':'fpl.com','GE':'ge.com','GEICO':'geico.com','IBM':'ibm.com','The Hartford':'thehartford.com','CVS':'cvs.com','Walgreens':'walgreens.com','Kaiser':'kaiserpermanente.org','Humana':'humana.com','Pfizer':'pfizer.com','HMRC':'gov.uk','NYC':'nyc.gov','ICE':'ice.cr','Unisys':'unisys.com','Ford':'ford.com','MetLife':'metlife.com'};
+      const domain = domainMap[name];
+      return domain ? `https://cdn.brandfetch.io/${domain}/logo/original` : '';
+    }
+    
+    function getCompanyInitials(name) {
+      return name.split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
     }
     
     function getTechBadges(tech) {
-      const techs = tech.match(/\b(NLU|ASR|GRXML|XML|VoiceXML|TTS|Python|Perl|HIPAA|GenAI|ABNF|NLU|Watson|SYNC|VUI)\b/gi) || [];
+      const techs = tech.match(/\b(NLU|ASR|GRXML|XML|VoiceXML|TTS|Python|Perl|HIPAA|GenAI|ABNF|Watson|SYNC|VUI)\b/gi) || [];
       return [...new Set(techs)].slice(0, 3).map(t => `<span class="tech-badge">${t.toUpperCase()}</span>`).join('');
     }
     
@@ -336,8 +342,7 @@
       const t = i18n[currentLang];
       document.querySelector('#resultCount').textContent=t.resultCount(shown.length, projects.length);
       const sectorTrans = i18nProjects[currentLang];
-      const logoUrl = p => getCompanyLogoUrl(p.name);
-      grid.innerHTML = shown.length ? shown.map((p,i)=>{const logo=logoUrl(p);return `<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}"><img src="${logo}" alt="" class="project-logo" onerror="this.style.display='none'"><div class="project-top"><span class="project-sector"><span class="sector-icon">${sectorIcons[p.sector]||'○'}</span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-tech">${getTechBadges(p.tech)}</div><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`}).join('') : `<div class="empty">${t.empty}</div>`;
+      grid.innerHTML = shown.length ? shown.map((p,i)=>{const logo=getCompanyLogoUrl(p.name);const initials=getCompanyInitials(p.name);return `<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}">${logo?`<img src="${logo}" alt="${p.name}" class="project-logo" onerror="this.parentElement.querySelector('.project-logo-fallback').style.display='flex'; this.style.display='none'">`:`<div class="project-logo-fallback">${initials}</div>`}<div class="project-top"><span class="project-sector"><span class="sector-icon">${sectorIcons[p.sector]||'○'}</span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-tech">${getTechBadges(p.tech)}</div><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`}).join('') : `<div class="empty">${t.empty}</div>`;
       document.querySelectorAll('.project').forEach(card=>{ card.addEventListener('click',()=>openProject(+card.dataset.index)); card.addEventListener('keydown',e=>{if(e.key==='Enter')openProject(+card.dataset.index)}); });
     }
     const dialog=document.querySelector('#projectDialog');
