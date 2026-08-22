@@ -229,8 +229,8 @@
       document.querySelectorAll('.section-label')[1].textContent = t.archiveLabel;
       document.querySelector('.archive-head h2').innerHTML = t.archiveH2;
       
-      document.querySelectorAll('[aria-label*="Filtrar"]')[0].setAttribute('aria-label', t.filterSectorLabel);
-      document.querySelectorAll('[aria-label*="Filtrar"]')[1].setAttribute('aria-label', t.filterRegionLabel);
+      document.querySelector('#sectorFilters').setAttribute('aria-label', t.filterSectorLabel);
+      document.querySelector('#regionFilters').setAttribute('aria-label', t.filterRegionLabel);
       document.querySelector('#search').placeholder = t.searchPlaceholder;
       
       document.querySelectorAll('.section-label')[2].textContent = t.regionsLabel;
