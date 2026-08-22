@@ -102,10 +102,10 @@
     <div class="hero-bottom"><p>Desde banca y salud hasta aviación y servicios públicos: sistemas de voz diseñados para ser comprendidos cuando importa.</p><a class="scroll-link" href="#archivo">Explorar archivo</a></div>
   </header>
   <main>
-    <section class="overview"><div><div class="section-label">El trabajo</div><h2>La voz como <span>infraestructura</span> de confianza.</h2></div><div class="overview-copy"><p>Arquitectura, diseño lingüístico y optimización de experiencias que conectan a millones de personas con servicios esenciales. Un recorrido por mercados, idiomas y desafíos de conversación reales.</p></div></section>
+    <section class="overview"><div><div class="section-label">El trabajo</div><h2>AI conversacional <span>Empresarial</span></h2></div><div class="overview-copy"><p>Automatización conversacional empresarial: reconocimiento de voz, autenticación biométrica, IVR y chatbots multiidioma. 50+ sistemas en producción en banca, seguros, salud y telecomunicaciones.</p></div></section>
     <section class="statistics" aria-label="Resumen del portafolio"><div class="stat"><span class="stat-number">50+</span><span class="stat-label">Sistemas empresariales</span></div><div class="stat"><span class="stat-number">5</span><span class="stat-label">Regiones activas</span></div><div class="stat"><span class="stat-number">12</span><span class="stat-label">Industrias atendidas</span></div></section>
     <section id="archivo">
-      <div class="archive-head"><div><div class="section-label">Archivo seleccionado</div><h2>Proyectos en <i>conversación</i></h2></div><span class="result-count" id="resultCount"></span></div>
+      <div class="archive-head"><div><div class="section-label">Archivo seleccionado</div><h2>Proyectos</h2></div><span class="result-count" id="resultCount"></span></div>
       <div class="controls"><div><div class="filter-set" id="sectorFilters" aria-label="Filtrar por sector"></div><div class="filter-set" id="regionFilters" aria-label="Filtrar por región" style="margin-top:7px"></div></div><input class="search" id="search" type="search" placeholder="Buscar proyecto" aria-label="Buscar proyecto" /></div>
       <div class="project-grid" id="projectGrid"></div>
     </section>
@@ -122,8 +122,8 @@
         heroBottom: 'Desde banca y salud hasta aviación y servicios públicos: sistemas de voz diseñados para ser comprendidos cuando importa.',
         scrollLink: 'Explorar archivo',
         workLabel: 'El trabajo',
-        workH2: 'La voz como <span>infraestructura</span> de confianza.',
-        workCopy: 'Arquitectura, diseño lingüístico y optimización de experiencias que conectan a millones de personas con servicios esenciales. Un recorrido por mercados, idiomas y desafíos de conversación reales.',
+        workH2: 'AI conversacional <span>Empresarial</span>',
+        workCopy: 'Automatización conversacional empresarial: reconocimiento de voz, autenticación biométrica, IVR y chatbots multiidioma. 50+ sistemas en producción en banca, seguros, salud y telecomunicaciones.',
         stat1: '50+',
         stat1Label: 'Sistemas empresariales',
         stat2: '5',
@@ -131,7 +131,7 @@
         stat3: '12',
         stat3Label: 'Industrias atendidas',
         archiveLabel: 'Archivo seleccionado',
-        archiveH2: 'Proyectos en <i>conversación</i>',
+        archiveH2: 'Proyectos',
         filterSectorLabel: 'Filtrar por sector',
         filterRegionLabel: 'Filtrar por región',
         searchPlaceholder: 'Buscar proyecto',
@@ -150,8 +150,8 @@
         heroBottom: 'From banking and healthcare to aviation and public services: voice systems designed to be understood when it matters.',
         scrollLink: 'Explore archive',
         workLabel: 'The work',
-        workH2: 'Voice as <span>infrastructure</span> of trust.',
-        workCopy: 'Architecture, linguistic design, and optimization of experiences that connect millions of people with essential services. A journey through markets, languages, and real-world conversation challenges.',
+        workH2: 'Conversational <span>Enterprise</span> AI',
+        workCopy: 'Enterprise conversational automation: voice recognition, biometric authentication, IVR and multilingual chatbots. 50+ systems in production across banking, insurance, healthcare and telecommunications.',
         stat1: '50+',
         stat1Label: 'Enterprise systems',
         stat2: '5',
@@ -159,7 +159,7 @@
         stat3: '12',
         stat3Label: 'Industries served',
         archiveLabel: 'Selected archive',
-        archiveH2: 'Projects in <i>conversation</i>',
+        archiveH2: 'Projects',
         filterSectorLabel: 'Filter by sector',
         filterRegionLabel: 'Filter by region',
         searchPlaceholder: 'Search project',
@@ -253,6 +253,7 @@
 
     document.querySelector('#langToggle').addEventListener('click', () => {
       currentLang = currentLang === 'es' ? 'en' : 'es';
+      console.log('Idioma cambiado a:', currentLang);
       updateUI();
     });
 
