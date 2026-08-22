@@ -259,7 +259,7 @@
 
     const projects = [
       ['Bank of America','Banca','Norteamérica','Plataforma IVR bilingüe de autoservicio para operaciones bancarias minoristas a escala multimillonaria.','NLU, GRXML, diccionarios fonéticos y SLM para inglés y español; ciclos de optimización bajo tráfico productivo.'],
-      ['Banamex','Banca','LATAM','Iniciativas de voz de extremo a extremo: planificación, especificación VUI y endurecimiento de producción.','ASR y gramáticas de español mexicano, entregas escalonadas y control de calidad lingüística.'],
+      ['Banamex','Banca','LATAM','Plataforma de reconocimiento de voz para operaciones bancarias automatizadas y enrutamiento inteligente de llamadas.','ASR y gramáticas de español mexicano, entregas escalonadas y control de calidad lingüística.'],
       ['Fidelity Investments','Banca','Norteamérica','Enrutamiento por intención y soporte NINA para inversiones, brokerage y cuentas de retiro.','Gramáticas financieras GRXML, XML de intención, flujos de confirmación y regresión automatizada con Perl.'],
       ['JPMorgan Chase','Banca','Norteamérica','IVR corporativo y de consumo de alta disponibilidad conectado a expedientes financieros.','Optimización No-Input/No-Match e integraciones seguras entre Nuance Recognizer y APIs bancarias.'],
       ['Wells Fargo','Banca','Norteamérica','Portal conversacional para líneas de crédito, hipotecas y cuentas personales.','VoiceXML dinámico según segmento de cliente y datos obtenidos al inicio de llamada.'],
@@ -311,9 +311,79 @@
       ['ICE Costa Rica / Unisys','Servicios','LATAM','Gateway centralizado de voz para la telco nacional y soporte de servicios públicos.','Modelos acústicos costarricenses, vocabulario geográfico e interoperabilidad con sistemas Unisys.'],
       ['Ford Motor Company','Automoción','Global','Capas de voz para Ford SYNC en vehículos de mercados hispanohablantes.','Vocabulario y gramáticas en español optimizados para motores acústicos con memoria limitada.'],
       ['MetLife','Seguros','Norteamérica','Portal de autoservicio y enrutamiento para pólizas, reclamos y pagos.','Arquitecturas NLU, VUI sensible y privacidad para tráfico concurrente de alta capacidad.']
-    ].map(([name, sector, region, scope, tech]) => ({name, sector, region, scope, tech}));
+    ].map(([name, sector, region, scope, tech]) => ({
+      name,
+      sector,
+      region,
+      scope: { es: scope, en: scope },
+      tech: { es: tech, en: tech }
+    }));
+    const englishProjectScopes = {
+      'Bank of America': 'Bilingual retail banking IVR automated card, account, billing, and Spanish-language requests while improving recognition accuracy and authentication flow.',
+      'Banamex': 'Mexican Spanish voice application supported sensitive banking interactions through phased grammar development, voice UI implementation, and customer-experience improvements.',
+      'Fidelity Investments': 'Conversational routing and virtual-assistant dialogs supported wealth, brokerage, retirement, and investment self-service while protecting transactional accuracy with confirmations.',
+      'JPMorgan Chase': 'High-availability banking IVR handled corporate and consumer requests, using recovery dialogs and secured integrations for balance-related interactions.',
+      'Wells Fargo': 'Conversational portal routed customers through credit, mortgage, and retail-account transactions with dialogs adapted from customer segment data.',
+      'Vanguard': 'Natural-language investor support provided real-time market quotes and verified capital transfers using dynamic company-name and ticker recognition.',
+      'BBVA': 'Spanish banking virtual-assistant layers used tuned grammars and live-audio regression testing to improve recognition accuracy and reduce errors.',
+      'HSBC': 'Active and passive voice biometrics authenticated retail-banking customers across international hubs while meeting local privacy and compliance requirements.',
+      'Banco Santander': 'Voice biometric authentication replaced rigid DTMF flows with natural spoken verification for Mexican retail-banking customers.',
+      'Banco Itaú': 'Cross-border conversational IVR provided Portuguese and Spanish call steering with voice biometric support for secure customer identification.',
+      'Banorte': 'Voice biometrics verified elderly pension recipients by phone, reducing branch visits and helping mitigate identity theft and pension fraud.',
+      'Charles Schwab': 'Conversational telephone portal supported trading and wealth-management navigation with low-latency market-data synchronization and rapid-speech recognition.',
+      'Banco Mediolanum': 'Banking virtual assistant used localized grammars, call-state auditing, and speech-recording analysis to support complex automated dialogue paths.',
+      'Lloyds': 'Retail-banking virtual assistant used regional British grammars and NLU analytics to reduce false acceptance during customer identification.',
+      'RBS (Royal Bank of Scotland)': 'Banking virtual assistant combined regional UK grammars with native-audio testing to reduce speech recognition word errors.',
+      'Garanti Bank': 'Turkish conversational banking application used expanded grammar assets and audio analysis to support stable transactional voice interactions.',
+      'ING Netherlands': 'Voice-controlled mobile banking assistant used Dutch grammars and accuracy analysis to support spoken banking operations.',
+      'Bancomer': 'Voice biometrics validation synchronized speech recognition with identity verification, providing secure Mexican Spanish authentication for automated banking.',
+      'Banco Bradesco': 'Automated banking voice architecture used tuned Portuguese text-to-speech rules for natural reading of dynamic financial alphanumeric strings.',
+      'Banreservas': 'Voice biometric enrollment and verification authenticated contact-center customers using phonetic adaptation for Dominican Spanish speech patterns.',
+      'Scotiabank': 'Voice biometrics strengthened Mexican contact-center authentication through regional phonetic adaptation and secure, low-friction caller workflows.',
+      'Telefónica / Movistar': "High-capacity IVR registration gateway captured subscriber identity data for Mexico's mobile-user registry using robust voice validation dialogs.",
+      'AT&T': 'Bilingual address-recognition system parsed mixed Spanish and English location requests, improving automated telecommunications service routing.',
+      'T-Mobile': 'Modernized telecom support channels with optimized Spanish NLU, grammars, and dictionaries for accurate low-latency call routing.',
+      'Orange': 'Call-steering system classified technical support, bundled services, line changes, and billing requests to improve transfer accuracy.',
+      'MCI': 'Conversational routing for long-distance support used optimized Spanish speech assets to reduce misrecognitions in high-volume telephony.',
+      'Cox Communications / Charter (Spectrum) / Comcast (Xfinity)': 'Subscriber-service speech assets supported billing and technical-account interactions with accurate Spanish routing across legacy IVR systems.',
+      'Genesys': 'Speech-component integration support addressed contact-center compatibility, configuration alignment, and controlled platform rollout behavior.',
+      'Allus': 'Colombian license-plate NLU model transformed large text datasets into regional phonetic training corpora for more accurate automated identification.',
+      'Centrelink': 'High-security welfare voice portal used tuned biometrics and data evaluation to maintain accurate telephone identity verification.',
+      'Xanavi': 'Domain-specific speech grammars supported predictable command-style voice interactions by reducing ambiguity across iterative updates.',
+      'FedEx': 'Global logistics conversational system captured tracking identifiers, verified addresses, and routed courier collections through automated speech interactions.',
+      'Amtrak': 'Passenger-rail voice assistant automated scheduling and ticketing inquiries with tuned destination and travel-parameter recognition across regional accents.',
+      'American Airlines': 'Bilingual conversational IVR supported bookings, schedules, and frequent-flyer inquiries through Spanish NLU and airport-name recognition.',
+      'Emirates Airlines': 'Virtual-assistant speech layer supported flight reservations and ticketing inquiries with grammar tuning for global traveler accents.',
+      'US Airways': 'Automated flight portal used airline grammars and phonetic dictionaries to handle airport terminology and dynamic travel requests.',
+      'Continental Airlines / Delta Air Lines / Southwest Airlines / United Airlines': 'Bilingual flight-information system let customers verify itineraries naturally while recognizing flight identifiers and city pairs over telephony.',
+      'DirecTV': 'Set-top-box voice system let subscribers manage billing, premium services, receiver diagnostics, and content search through bilingual speech.',
+      'Travel Inn': 'Hospitality voice application used transcription feedback, grammar updates, and threshold tuning to improve recognition consistency.',
+      'Dell Technologies': 'Multilingual support automation identified hardware products and generated regional service tickets with monitored speech-recognition assets.',
+      'FPL (Florida Power & Light)': 'Utility voice application automated account identification and service inquiries through phone-number recognition and structured dialogue nodes.',
+      'GE': 'UK voice-support work coordinated grammar, specification, and speech-trial activities while keeping technical outputs aligned with reporting.',
+      'GEICO': 'Conversational insurance voice components improved dialogue reliability and routing for high-volume customer service interactions.',
+      'IBM': 'Enterprise voice automation integrated Watson NLU with Nuance text-to-speech for interoperable telephony and middleware conversations.',
+      'The Hartford': 'Spanish call analysis used logs, transcripts, and grammar remediation to identify and improve speech-recognition quality issues.',
+      'CVS Health': 'Pharmacy voice portal automated prescription orders, refills, and store routing while improving drug-name disambiguation under HIPAA requirements.',
+      'Walgreens': 'Bilingual voice automation scheduled immunization appointments and validated multi-dose eligibility during high-demand pandemic traffic.',
+      'Kaiser Permanente / Humana / Pfizer': 'Conversational healthcare portals handled network, coverage, and appointment requests while maintaining HIPAA-compliant member verification.',
+      'HMRC': 'Multichannel public-service automation prototype used British English grammars and routing validation to monitor conversational reliability.',
+      'New York City 311': 'Multi-agency citizen-response system converted natural-language reports into structured incident summaries and clarified routing requests.',
+      'ICE Costa Rica / Unisys': 'National call-steering gateway routed billing, mobile, and utility-support inquiries using Costa Rican Spanish models and legacy-system interoperability.',
+      'Ford Motor Company': 'In-vehicle speech processing enabled localized Spanish voice commands for vehicle control and multimedia management on Ford SYNC.',
+      'MetLife': 'Natural-language insurance portal handled policy inquiries, claims, and premium verification with privacy-conscious conversational self-service.'
+    };
+    projects.forEach(project => {
+      project.scope.en = englishProjectScopes[project.name];
+    });
     const colors = { 'Norteamérica':'#e65d45', 'LATAM':'#83b8c7', 'Europa':'#a6d6c4', 'APAC':'#e7b86b', 'Global':'#bba6d6' };
     const sectorIcons = { 'Banca':'🏦', 'Telecom':'📱', 'Logística':'📦', 'Viajes':'✈️', 'Media':'📺', 'Tecnología':'⚙️', 'Salud':'🏥', 'Seguros':'🛡️', 'Sector público':'🏛️', 'Servicios':'🔧', 'Hostelería':'🏨', 'Automoción':'🚗' };
+    const i18nScopes = {
+      'Plataforma de reconocimiento de voz para operaciones bancarias automatizadas y enrutamiento inteligente de llamadas.': {
+        es: 'Plataforma de reconocimiento de voz para operaciones bancarias automatizadas y enrutamiento inteligente de llamadas.',
+        en: 'Voice recognition platform for automated banking operations and intelligent call routing.'
+      }
+    };
     
     function getCompanyLogoUrl(name) {
       const domainMap = {'Bank of America':'bankofamerica.com','Banamex':'banamex.com','Fidelity':'fidelity.com','JPMorgan Chase':'jpmorganchase.com','Wells Fargo':'wellsfargo.com','Vanguard':'vanguard.com','BBVA':'bbva.com','HSBC':'hsbc.com','Santander':'santander.com','Banco Itaú':'itau.com.br','Banorte':'banorte.com','Charles Schwab':'schwab.com','Banco Mediolanum':'mediolanum.com','Lloyds':'lloydsbank.com','RBS':'rbs.co.uk','Garanti Bank':'garantibbva.com','ING':'ing.com','Bancomer':'bancomer.com','Banco Bradesco':'bradesco.com.br','Banreservas':'banreservas.com','Scotiabank':'scotiabank.com','Telefónica':'telefonica.com','AT&T':'att.com','T-Mobile':'t-mobile.com','Orange':'orange.com','MCI':'mci.com','Cox':'cox.com','Charter':'charter.com','Comcast':'comcast.com','Genesys':'genesys.com','Allus':'allus.co','Centrelink':'centrelink.gov.au','Xanavi':'xanavi.jp','FedEx':'fedex.com','Amtrak':'amtrak.com','American Airlines':'aa.com','Emirates':'emirates.com','US Airways':'usairways.com','Continental':'continental.com','Delta':'delta.com','Southwest':'southwest.com','United':'united.com','DirecTV':'directv.com','Travel Inn':'travelodge.com','Dell':'dell.com','FPL':'fpl.com','GE':'ge.com','GEICO':'geico.com','IBM':'ibm.com','The Hartford':'thehartford.com','CVS':'cvs.com','Walgreens':'walgreens.com','Kaiser':'kaiserpermanente.org','Humana':'humana.com','Pfizer':'pfizer.com','HMRC':'gov.uk','NYC':'nyc.gov','ICE':'ice.cr','Unisys':'unisys.com','Ford':'ford.com','MetLife':'metlife.com'};
@@ -343,7 +413,7 @@
       const t = i18n[currentLang];
       document.querySelector('#resultCount').textContent=t.resultCount(shown.length, projects.length);
       const sectorTrans = i18nProjects[currentLang];
-      grid.innerHTML = shown.length ? shown.map((p,i)=>{const logo=getCompanyLogoUrl(p.name);const initials=getCompanyInitials(p.name);return `<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}">${logo?`<img src="${logo}" alt="${p.name}" class="project-logo" onerror="this.parentElement.querySelector('.project-logo-fallback').style.display='flex'; this.style.display='none'">`:`<div class="project-logo-fallback">${initials}</div>`}<div class="project-top"><span class="project-sector"><span class="sector-icon">${sectorIcons[p.sector]||'○'}</span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${p.scope}</p><div class="project-tech">${getTechBadges(p.tech)}</div><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`}).join('') : `<div class="empty">${t.empty}</div>`;
+      grid.innerHTML = shown.length ? shown.map((p,i)=>{const logo=getCompanyLogoUrl(p.name);const initials=getCompanyInitials(p.name);const scopeText=p.scope[currentLang];const techText=p.tech[currentLang];return `<article class="project" tabindex="0" role="button" aria-label="Abrir proyecto ${p.name}" style="--region-color:${colors[p.region]}" data-index="${projects.indexOf(p)}">${logo?`<img src="${logo}" alt="${p.name}" class="project-logo" onerror="this.parentElement.querySelector('.project-logo-fallback').style.display='flex'; this.style.display='none'">`:`<div class="project-logo-fallback">${initials}</div>`}<div class="project-top"><span class="project-sector"><span class="sector-icon">${sectorIcons[p.sector]||'○'}</span>${sectorTrans[p.sector]||p.sector}</span><span class="region-dot" title="${p.region}"></span></div><h3>${p.name}</h3><p>${scopeText}</p><div class="project-tech">${getTechBadges(techText)}</div><div class="project-footer"><span>${p.region}</span><span class="project-arrow">↗</span></div></article>`}).join('') : `<div class="empty">${t.empty}</div>`;
       document.querySelectorAll('.project').forEach(card=>{ card.addEventListener('click',()=>openProject(+card.dataset.index)); card.addEventListener('keydown',e=>{if(e.key==='Enter')openProject(+card.dataset.index)}); });
     }
     const dialog=document.querySelector('#projectDialog');
@@ -353,9 +423,9 @@
       document.querySelector('#modalMeta').textContent=`${i18nProjects[currentLang][p.sector]||p.sector} / ${p.region}`; 
       document.querySelector('#modalTitle').textContent=p.name; 
       document.querySelectorAll('.modal h3')[0].textContent = t.modalScope;
-      document.querySelector('#modalScope').textContent=p.scope; 
+      document.querySelector('#modalScope').textContent=p.scope[currentLang];
       document.querySelectorAll('.modal h3')[1].textContent = t.modalTech;
-      document.querySelector('#modalTech').textContent=p.tech; 
+      document.querySelector('#modalTech').textContent=p.tech[currentLang]; 
       dialog.showModal(); 
     }
     document.querySelector('#closeDialog').addEventListener('click',()=>dialog.close());
